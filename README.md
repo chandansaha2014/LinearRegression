@@ -5,3 +5,6 @@
     Logistic Regression Model in R . 
     Linear Discremental Analysis . 
     Classification using KNN. 
+3. Validation 
+    K fold Cross validation 
+    Bootstrap validation
