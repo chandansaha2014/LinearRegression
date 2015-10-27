@@ -8,3 +8,7 @@
 3. Validation 
     K fold Cross validation 
     Bootstrap validation
+4. SVM Classification and plot 
+    Linear kernel 
+    Radial Kernel 
+    Data set ESL.Mixture is added in Data folder 
