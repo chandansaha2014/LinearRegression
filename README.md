@@ -12,3 +12,4 @@
     Linear kernel 
     Radial Kernel 
     Data set ESL.Mixture is added in Data folder 
+5. Web spam classification in Mtlab using perceptron
