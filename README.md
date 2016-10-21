@@ -10,7 +10,7 @@ Machine learning algorithm implementation in Python and R . Some work done as pa
 3. Validation 
     K fold Cross validation 
     Bootstrap validation
-4. SVM Classification and plot 
+4. SVM Classification and plot using Matlab
     Linear kernel 
     Radial Kernel 
     Data set ESL.Mixture is added in Data folder 
