@@ -1,0 +1,86 @@
+---
+title: "digit_reader-R_Markdown"
+author: "Bob Minnich"
+date: "January 7, 2016"
+output: html_document
+---
+
+```{r}
+library(bpca)
+library(rgl)
+library(ggfortify)
+library(ggplot2)
+library(RColorBrewer)
+library(knitr)
+library(rglwidget)
+knit_hooks$set(webgl = hook_webgl)
+
+setwd("/Users/bobminnich/Documents/Columbia/Courses/Data_Mining/Examples/DigitReader")
+data = as.data.frame(read.csv("train.csv", header = TRUE, sep = ","))
+labels2 = data[,1]
+labels_frame <- as.data.frame(data[,1])
+labels_frame <- setNames(labels_frame, c("l"))
+
+```
+
+```{r}
+data_r = data[,-1]
+pca = prcomp(data_r)
+```
+
+```{r,  fig.align='center'}
+plot.new()
+screeplot(pca, main = "PCA Plot of NIST data", type = "lines")
+```
+
+```{r}
+
+dev.off()
+colorpal = c("#E41A1C", "#0066ff", "#4DAF4A", "#984EA3", "#FF7F00", "#FFFF33", "#A65628","#ff37cb","#66ff33", "#00ffff")
+
+#Find colors associtated with labels and apply the color palet
+for(i in 1:10){
+  labels_frame$color[data$label == i-1] = colorpal[i]
+}
+```
+
+```{r, eval=FALSE}
+#Used {r testgl, webgl=TRUE, } for R Chunk
+#Plotting
+plot3d(pca$x[,1:3],col = labels_frame$color, size = 1)
+#Set initial View
+rgl.viewpoint(theta = -35, phi = 30, fov = 45, zoom = 1)
+#Add Legend (Only viewable in R)
+legend3d("topright", legend = paste('Num', c(0:9)), pch = 16, col = colorpal, cex=1, inset=c(0.15))
+
+#Legend 
+pie(rep(1,10),labels = c(0:9), col=colorpal, main = "Hand Written Digits - Legend")
+
+```
+<table border="2" style="width:50%" align="center">
+  <caption><font color="#000000">Legend : Scroll to Zoom, Click and drag to rotate</font></caption>
+<tr>
+  <td bgcolor="#E41A1C" align="center"><font color="#000000">Num 0</font></td>
+  <td bgcolor="#0066ff" align="center"><font color="#000000">Num 1</font></td>
+  <td bgcolor="#4DAF4A" align="center"><font color="#000000">Num 2</font></td>
+  <td bgcolor="#984EA3" align="center"><font color="#000000">Num 3</font></td>
+  <td bgcolor="#FF7F00" align="center"><font color="#000000">Num 4</font></td>
+</tr>
+<tr>
+  <td bgcolor="#FFFF33" align="center"><font color="#000000">Num 5</font></td>
+  <td bgcolor="#A65628" align="center"><font color="#000000">Num 6</font></td>
+  <td bgcolor="#ff37cb" align="center"><font color="#000000">Num 7</font></td>
+  <td bgcolor="#66ff33" align="center"><font color="#000000">Num 8</font></td>
+  <td bgcolor="#00ffff" align="center"><font color="#000000">Num 9</font></td>
+</tr>
+</table>
+
+```{r testgl, webgl=TRUE, echo = FALSE, fig.align='center'}
+#Plotting
+plot3d(pca$x[,1:3],col = labels_frame$color, size = 1)
+#Set initial View
+rgl.viewpoint(theta = -35, phi = 30, fov = 45, zoom = 1)
+#Add Legend (Only viewable in R)
+legend3d("topright", legend = paste('Num', c(0:9)), pch = 16, col = colorpal, cex=1, inset=c(0.15))
+
+```
