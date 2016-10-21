@@ -1,4 +1,5 @@
 # Machine Learning Examples 
+Machine learning algorithm implementation in Python and R . Some work done as part of class work on open datasets.
 1. Linear Regresssion Practice in R
     Lear modelling using R with Boston city Data Set . 
 2. Classification 
